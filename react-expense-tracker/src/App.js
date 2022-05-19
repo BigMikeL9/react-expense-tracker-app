@@ -6,6 +6,17 @@ import Expenses from "./components/Expenses/Expenses";
 const App = () => {
   // console.log(React);
 
+  const addExpenseHandler = (enteredExpenseData) => {
+    const expenseData = {
+      ...enteredExpenseData,
+    };
+
+    expenses.push(expenseData);
+
+    console.log(expenseData);
+    console.log(expenses);
+  };
+
   const expenses = [
     {
       id: "e1",
@@ -35,7 +46,7 @@ const App = () => {
 
   return (
     <>
-      <NewExpense />
+      <NewExpense onAddExpense={addExpenseHandler} />
 
       <Expenses expenses={expenses}></Expenses>
     </>

@@ -3,10 +3,24 @@ import ExpenseForm from "./ExpenseForm";
 
 import "./NewExpense.scss";
 
-const NewExpense = () => {
+const NewExpense = (props) => {
+  // console.log(props);
+
+  // -- gets submitted data from child component 'ExpenseForm.js'
+  const submittedExpenseDataHandler = (enteredExpenseDate) => {
+    const expenseData = {
+      ...enteredExpenseDate, // -- pull all key/value pairs from passed in argument
+      id: Date.now().toString(), // -- generate random id
+    };
+
+    // console.log(expenseData);
+
+    props.onAddExpense(expenseData);
+  };
+
   return (
     <div className="new-expense">
-      <ExpenseForm />
+      <ExpenseForm onSubmitExpenseData={submittedExpenseDataHandler} />
     </div>
   );
 };

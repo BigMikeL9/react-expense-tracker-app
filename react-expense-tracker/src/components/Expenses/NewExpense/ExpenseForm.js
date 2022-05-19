@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "./ExpenseForm.scss";
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
@@ -60,13 +60,14 @@ const ExpenseForm = () => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const expenseDate = {
+    const expenseData = {
       title: enteredTitle,
       amount: enteredAmount,
       date: new Date(enteredDate),
     };
 
-    console.log(expenseDate);
+    // -- pass Data to PARENT component 'NewExpense.js'
+    props.onSubmitExpenseData(expenseData);
 
     // -- Clear inputs in form using 'Two-Way Binding'
     setEnteredAmount("");
