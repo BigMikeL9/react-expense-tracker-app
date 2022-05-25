@@ -15,6 +15,7 @@ const NewExpense = (props) => {
 
     // console.log(expenseData);
 
+    // -- pass Data to PARENT component 'App.js'
     props.onAddExpense(expenseData);
   };
 

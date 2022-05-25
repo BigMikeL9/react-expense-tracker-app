@@ -81,6 +81,7 @@ const ExpenseForm = (props) => {
         <div className="new-expense__control">
           <label>Title</label>
           <input
+            required
             onChange={titleChangeHandler}
             value={enteredTitle}
             type="text"
@@ -89,6 +90,7 @@ const ExpenseForm = (props) => {
         <div className="new-expense__control">
           <label>Amount</label>
           <input
+            required
             onChange={amountChangeHandler}
             value={enteredAmount}
             type="number"
@@ -98,6 +100,7 @@ const ExpenseForm = (props) => {
         <div className="new-expense__control">
           <label>Date</label>
           <input
+            required
             onChange={dateChangeHandler}
             value={enteredDate}
             type="date"
