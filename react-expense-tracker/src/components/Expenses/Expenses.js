@@ -1,50 +1,43 @@
 import React, { useState } from "react";
-import ExpenseItem from "./ExpenseItem";
 import Card from "../UI/Card";
 import ExpensesFilter from "./ExpensesFilter";
+import ExpensesList from "./ExpensesList";
+import ExpensesChart from "../Chart/ExpensesChart";
 
 import "./Expenses.scss";
 
 const Expenses = (props) => {
-  //   console.log(props);
+  // console.log(props);
 
   const [filteredYear, setFilteredYear] = useState("2022");
 
-  // get data/yearFilter from child component ('ExpenseFilter.js')
+  // -- get data/yearFilter from child component ('ExpenseFilter.js')
   const filterYearChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
   };
 
-  /* filter expenseData Array to selected year */
+  // -- filter expenseData Array to selected year
   const filtered_Expenses = props.expenses.filter((expense) => {
-    // expense.date.getFullYear().toString() === filteredYear;
+    // expense.date.getFullYear().toString() === props.selectedYear;
     return expense.date.toISOString().includes(filteredYear);
   });
 
-  console.log(filtered_Expenses);
+  console.log("Filtered Expenses: ", filtered_Expenses);
 
   return (
-    <Card className="expenses">
-      {/* 👇 Controlled component 👇 */}
-      <ExpensesFilter
-        selectedYear={filteredYear}
-        onChangeFilter={filterYearChangeHandler}
-      />
+    <>
+      <ExpensesChart filteredExpenses={filtered_Expenses} />
 
-      {filtered_Expenses.map((filtered_Expense) => {
-        const expense_Item = (
-          <ExpenseItem
-            key={filtered_Expense.id}
-            title={filtered_Expense.title}
-            amount={filtered_Expense.amount}
-            date={filtered_Expense.date}
-          />
-        );
+      <Card className="expenses">
+        {/* 👇 Controlled component 👇 */}
+        <ExpensesFilter
+          selectedYear={filteredYear}
+          onChangeFilter={filterYearChangeHandler}
+        />
 
-        return expense_Item;
-      })}
+        <ExpensesList filteredExpenses={filtered_Expenses} />
 
-      {/* <ExpenseItem
+        {/* <ExpenseItem
         title={expenses[0].title}
         amount={expenses[0].amount}
         date={expenses[0].date}
@@ -67,7 +60,8 @@ const Expenses = (props) => {
         amount={expenses[3].amount}
         date={expenses[3].date}
       ></ExpenseItem> */}
-    </Card>
+      </Card>
+    </>
   );
 };
 
